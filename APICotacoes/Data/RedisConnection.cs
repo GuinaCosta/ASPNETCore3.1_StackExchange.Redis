@@ -17,5 +17,11 @@ namespace APICotacoes.Data
             var dbRedis = _conexao.GetDatabase();
             return dbRedis.StringGet(key);
         }
+
+        public bool SaveValue(string key, string value)
+        {
+            var dbRedis = _conexao.GetDatabase();
+            return dbRedis.StringSet(key, value);
+        }
     }
 }

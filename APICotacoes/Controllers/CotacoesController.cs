@@ -15,5 +15,16 @@ namespace APICotacoes.Controllers
             return Content(redisConnection.GetValueFromKey(
                 $"Cotacao-{moeda.ToUpper()}") ?? "{}", "application/json");
         }
+
+        [HttpPost("{moeda}")]
+        public ContentResult Save(
+            [FromServices]RedisConnection redisConnection,
+            [FromBody] string value,
+            string moeda
+        )
+        {
+            redisConnection.SaveValue($"Cotacao-{moeda.ToUpper()}", value);
+            return Content("ok", "application/json");
+        }
     }
 }
